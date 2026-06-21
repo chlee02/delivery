@@ -23,7 +23,7 @@ EVENT_KEYWORDS = ["리뷰", "이벤트", "리뷰약속", "뇌물", "서비스", 
 # 요기요 API 엔드포인트 및 인증 헤더 (v3에서 검증된 스펙 사용)
 BASE_URL = "https://api.yogiyo.co.kr/shopyo/v1"
 HEADERS = {
-    "x-api-key": "qua9EeW1ohth4ain",
+    "x-api-key": os.getenv("YOGIYO_API_KEY", ""),
     "X-YGY-APP-VERSION": "9.0.0",
     "X-YGY-OS-TYPE": "IOS",
     "x-ygy-route": "v2",
@@ -101,6 +101,11 @@ def run_real_scraper(limit, offset=0, lat=None, lng=None, adm_code=None):
     if not adm_code:
         print("❌ [Error] 행정동 코드(adm_code)는 필수 항목입니다. 실행을 중단합니다.")
         sys.exit(1)
+        
+    # API 키 누락 검증
+    if not os.getenv("YOGIYO_API_KEY"):
+        print("⚠️ [Warning] YOGIYO_API_KEY 환경변수가 설정되지 않았습니다. 실시간 수집이 실패할 수 있습니다.")
+
     
     # 위치 정보 결정 (직접 입력 > 기본값)
     if lat and lng:
