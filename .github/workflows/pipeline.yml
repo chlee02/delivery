@@ -1,0 +1,40 @@
+name: Clean Delivery Data Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # GitHub 웹 콘솔에서 원클릭 수동 실행 지원
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Install Playwright Browsers
+      run: |
+        playwright install chromium
+
+    - name: Run Data Pipeline
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      run: |
+        # 1. 요기요 상점 데이터 수집 (우선 오프라인 안전 검증을 위해 mock 데이터 가동)
+        python src/scraper/ygy_scraper.py --mock
+        # 2. 데이터 품질 검증 (DQ)
+        python src/quality/dq_validator.py
+        # 3. 데이터 정제 및 마트 적재
+        python src/transformation/transformer.py

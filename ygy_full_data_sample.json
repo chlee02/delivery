@@ -1,0 +1,493 @@
+{
+  "description": "Yogiyo API Full Data Sample (List + Detail)",
+  "retrieved_at": "2026-06-13",
+  "list_api_response": {
+    "id": 413273,
+    "name": "기대만족-본점",
+    "location": {
+      "lat": "37.5072275",
+      "lng": "127.0261017"
+    },
+    "vertical_type": "FOOD",
+    "vertical_sub_type": null,
+    "vendor_categories": [
+      "족발/보쌈",
+      "포장",
+      "고기/구이",
+      "한식",
+      "야식",
+      "프랜차이즈"
+    ],
+    "tags": [
+      "RELAYO",
+      "CESCO"
+    ],
+    "bpr_ranking": null,
+    "image": {
+      "logo_url": "https://rev-static.yogiyo.co.kr/public/franchise/new_logo/20231122110223_FR_20231122_2258_logo_300x300.jpg",
+      "thumbnail_url": "https://rev-static.yogiyo.co.kr/franchise/thumbnail/20230609135248228495_815bf97ce5301a1b4c621d10f537b216_tn.jpg",
+      "yostore_logo_url": null,
+      "background_urls": [
+        "https://rev-static.yogiyo.co.kr/restaurants/detail_image/20230609135320185716_6bf5bd33e2ef848cc6a7eaec85afedba.jpg",
+        "https://rev-static.yogiyo.co.kr/restaurants/detail_image/20230609135320815364_3baad5c5a1d0164a97c0ce53bee557e0.jpg",
+        "https://rev-static.yogiyo.co.kr/restaurants/detail_image/20230914110317500384_c268a1624d589ffe3487d9d1082054cf.jpg",
+        "https://rev-static.yogiyo.co.kr/restaurants/detail_image/20230914110318052683_36c304faf822fb3657113ca17416ffb8.jpg"
+      ]
+    },
+    "review": {
+      "average_rating": 4.9,
+      "count": 33317,
+      "image_count": 32807,
+      "reply_count": 33301
+    },
+    "open_status": {
+      "current_open_status": "OPENING_TIME",
+      "next_open_status": "CLOSED",
+      "next_open_status_start_at": "2026-06-12T19:30:00.000Z"
+    },
+    "franchise": {
+      "id": 2258,
+      "ygy_franchise_id": 2620,
+      "name": "[Brand]기대만족",
+      "special_title": "기대만족"
+    },
+    "serving_type": {
+      "vd": {
+        "ypx_minimum_order_amount": null,
+        "ypx_ceiling_exceeded_discount_amount": null,
+        "estimated_delivery_minute": {
+          "minimum": 29,
+          "maximum": 44
+        },
+        "available": true,
+        "delivery_fee_by_order_amounts": [
+          {
+            "order_amount": 10000,
+            "delivery_fee": 0
+          }
+        ],
+        "coupon_discount": {
+          "maximum_amount": 4000
+        },
+        "shop_discount": null,
+        "additional_discount": null,
+        "bpr_discount": null,
+        "fixed_rate_discount": null,
+        "payment_methods": [
+          "ONSITE_CASH",
+          "ONSITE_CARD",
+          "ONLINE"
+        ]
+      },
+      "vd_preorder": null,
+      "stackable": {
+        "ypx_minimum_order_amount": 0,
+        "ypx_ceiling_exceeded_discount_amount": null,
+        "estimated_delivery_minute": {
+          "minimum": 23,
+          "maximum": 33
+        },
+        "status": "DELIVERY_SUSPENDED",
+        "original_delivery_fee": 2500,
+        "delivery_fee_by_order_amounts": [
+          {
+            "order_amount": 10000,
+            "delivery_fee": 2500
+          }
+        ],
+        "delivery_fee_surcharge_amount": 0,
+        "delivery_fee_campaigns": [],
+        "delivery_fee_funding_amount": 0,
+        "coupon_discount": {
+          "maximum_amount": 4000
+        },
+        "shop_discount": null,
+        "additional_discount": null,
+        "bpr_discount": null,
+        "fixed_rate_discount": null,
+        "payment_methods": [
+          "ONLINE"
+        ]
+      },
+      "direct": null,
+      "economy": null,
+      "robot": null,
+      "pickup": {
+        "available": true,
+        "minimum_duration_minute": 10,
+        "coupon_discount": {
+          "maximum_amount": 5000
+        },
+        "shop_discount": null,
+        "additional_discount": null,
+        "bpr_discount": null,
+        "fixed_rate_discount": null,
+        "payment_methods": [
+          "ONLINE"
+        ]
+      },
+      "pre_order_pickup": null,
+      "previsit": null,
+      "priority": [
+        "VD",
+        "PICKUP",
+        "STACKABLE"
+      ]
+    },
+    "distance": 1576.19,
+    "catalog_vendor_id": null,
+    "exposure_type": "CONTRACT",
+    "ad_id": null,
+    "point": {
+      "total": 5
+    },
+    "representative_menus": [
+      {
+        "id": 1334218685,
+        "name": "시그니처 패키지",
+        "image_path": "PARTNER_FR_IMG/기대만족/2023-06-07/제휴FR_20230605_기대만족_시그니처패키지_1080x640.jpg",
+        "price": 38000
+      },
+      {
+        "id": 1334218670,
+        "name": "부드러운 족발 패키지",
+        "image_path": "PARTNER_FR_IMG/기대만족/2023-06-07/제휴FR_20230605_기대만족_부드러운족발패키지_1080x640.jpg",
+        "price": 37000
+      },
+      {
+        "id": 1334218656,
+        "name": "마늘족발 패키지",
+        "image_path": "PARTNER_FR_IMG/기대만족/2023-06-07/제휴FR_20230605_기대만족_마늘족발패키지_1080x640.jpg",
+        "price": 38000
+      },
+      {
+        "id": 1334218706,
+        "name": "직화 불족발 패키지",
+        "image_path": "PARTNER_FR_IMG/기대만족/2023-06-07/제휴FR_20230605_기대만족_직화불족발패키지_1080x640.jpg",
+        "price": 38000
+      },
+      {
+        "id": 1334218669,
+        "name": "부드러운 보쌈 패키지",
+        "image_path": "PARTNER_FR_IMG/기대만족/2023-06-07/제휴FR_20230605_기대만족_부드러운보쌈패키지_1080x640.jpg",
+        "price": 37000
+      },
+      {
+        "id": 1334218665,
+        "name": "반반 패키지",
+        "image_path": "PARTNER_FR_IMG/기대만족/2023-06-07/제휴FR_20230605_기대만족_반반패키지_1080x640.jpg",
+        "price": 50000
+      },
+      {
+        "id": 1334218646,
+        "name": "기대만족 도시락",
+        "image_path": "PARTNER_FR_IMG/기대만족/2023-06-07/제휴FR_20230605_기대만족_기대만족도시락_1080x640.jpg",
+        "price": 15900
+      }
+    ]
+  },
+  "detail_api_response": {
+    "shop_id": 413273,
+    "profile": {
+      "name": "기대만족-본점",
+      "phone_number": "050718667411",
+      "law_address_sido": "서울특별시",
+      "law_address_sigungu": "강남구",
+      "law_address_eupmyeondong": "논현동",
+      "law_address_detail": " 181-14 기대만족,강남본점",
+      "custom_detailed_address": "지하1층"
+    },
+    "company": {
+      "owner_name": "홍태희",
+      "company_name": "기대만족 강남본점",
+      "company_number": "5401402987"
+    },
+    "location": {
+      "lat": "37.5072275",
+      "lng": "127.0261017"
+    },
+    "vertical_type": "FOOD",
+    "vertical_sub_type": null,
+    "vendor_categories": [
+      "족발/보쌈",
+      "포장",
+      "고기/구이",
+      "한식",
+      "야식",
+      "프랜차이즈"
+    ],
+    "tags": [
+      "RELAYO",
+      "CESCO"
+    ],
+    "image": {
+      "logo_url": "https://rev-static.yogiyo.co.kr/public/franchise/new_logo/20231122110223_FR_20231122_2258_logo_300x300.jpg",
+      "thumbnail_url": "https://rev-static.yogiyo.co.kr/franchise/thumbnail/20230609135248228495_815bf97ce5301a1b4c621d10f537b216_tn.jpg",
+      "yostore_logo_url": null,
+      "background_urls": [
+        "https://rev-static.yogiyo.co.kr/restaurants/detail_image/20230609135320185716_6bf5bd33e2ef848cc6a7eaec85afedba.jpg",
+        "https://rev-static.yogiyo.co.kr/restaurants/detail_image/20230609135320815364_3baad5c5a1d0164a97c0ce53bee557e0.jpg",
+        "https://rev-static.yogiyo.co.kr/restaurants/detail_image/20230914110317500384_c268a1624d589ffe3487d9d1082054cf.jpg",
+        "https://rev-static.yogiyo.co.kr/restaurants/detail_image/20230914110318052683_36c304faf822fb3657113ca17416ffb8.jpg"
+      ]
+    },
+    "schedule": {
+      "regular_schedule": [
+        {
+          "weekday": "MON",
+          "opening_time": {
+            "start": "10:40:00",
+            "end": "04:30:00"
+          },
+          "break_times": []
+        },
+        {
+          "weekday": "TUE",
+          "opening_time": {
+            "start": "10:40:00",
+            "end": "04:30:00"
+          },
+          "break_times": []
+        },
+        {
+          "weekday": "WED",
+          "opening_time": {
+            "start": "10:40:00",
+            "end": "04:30:00"
+          },
+          "break_times": []
+        },
+        {
+          "weekday": "THU",
+          "opening_time": {
+            "start": "10:40:00",
+            "end": "04:30:00"
+          },
+          "break_times": []
+        },
+        {
+          "weekday": "FRI",
+          "opening_time": {
+            "start": "10:40:00",
+            "end": "04:30:00"
+          },
+          "break_times": []
+        },
+        {
+          "weekday": "SAT",
+          "opening_time": {
+            "start": "10:40:00",
+            "end": "04:30:00"
+          },
+          "break_times": []
+        },
+        {
+          "weekday": "SUN",
+          "opening_time": {
+            "start": "10:40:00",
+            "end": "04:30:00"
+          },
+          "break_times": []
+        }
+      ],
+      "holidays": []
+    },
+    "review": {
+      "average_rating": 4.9,
+      "count": 33317,
+      "image_count": 32807,
+      "reply_count": 33301
+    },
+    "open_status": {
+      "current_open_status": "OPENING_TIME",
+      "next_open_status": "CLOSED",
+      "next_open_status_start_at": "2026-06-12T19:30:00.000Z"
+    },
+    "certificate": {
+      "hygiene": null
+    },
+    "franchise": {
+      "id": 2258,
+      "ygy_franchise_id": 2620,
+      "name": "[Brand]기대만족",
+      "special_title": "기대만족"
+    },
+    "serving_type": {
+      "vd": {
+        "ypx_minimum_order_amount": null,
+        "ypx_ceiling_exceeded_discount_amount": null,
+        "estimated_delivery_minute": {
+          "minimum": 29,
+          "maximum": 44
+        },
+        "available": true,
+        "delivery_fee_by_order_amounts": [
+          {
+            "order_amount": 10000,
+            "delivery_fee": 0
+          }
+        ],
+        "coupon_discount": {
+          "maximum_amount": 4000
+        },
+        "shop_discount": null,
+        "additional_discount": null,
+        "bpr_discount": null,
+        "fixed_rate_discount": null,
+        "payment_methods": [
+          "ONSITE_CASH",
+          "ONSITE_CARD",
+          "ONLINE"
+        ],
+        "point": {
+          "shop_promotions": [],
+          "franchise_promotions": [],
+          "membership_promotions": [
+            {
+              "display_name": "멤버십",
+              "percent": 5,
+              "mov": 0,
+              "membership_codes": [
+                "YP",
+                "YPX",
+                "YPXN",
+                "YPXT"
+              ],
+              "management_type": "YOGIYO",
+              "by_franchise": false
+            }
+          ],
+          "payments": [],
+          "menu_promotions": []
+        }
+      },
+      "vd_preorder": null,
+      "stackable": {
+        "ypx_minimum_order_amount": 0,
+        "ypx_ceiling_exceeded_discount_amount": null,
+        "estimated_delivery_minute": {
+          "minimum": 23,
+          "maximum": 33
+        },
+        "status": "DELIVERY_SUSPENDED",
+        "original_delivery_fee": 2500,
+        "delivery_fee_by_order_amounts": [
+          {
+            "order_amount": 10000,
+            "delivery_fee": 2500
+          }
+        ],
+        "delivery_fee_surcharge_amount": 0,
+        "delivery_fee_campaigns": [],
+        "delivery_fee_funding_amount": 0,
+        "coupon_discount": {
+          "maximum_amount": 4000
+        },
+        "shop_discount": null,
+        "additional_discount": null,
+        "bpr_discount": null,
+        "fixed_rate_discount": null,
+        "payment_methods": [
+          "ONLINE"
+        ],
+        "point": {
+          "shop_promotions": [],
+          "franchise_promotions": [],
+          "membership_promotions": [
+            {
+              "display_name": "멤버십",
+              "percent": 5,
+              "mov": 0,
+              "membership_codes": [
+                "YP",
+                "YPX",
+                "YPXN",
+                "YPXT"
+              ],
+              "management_type": "YOGIYO",
+              "by_franchise": false
+            }
+          ],
+          "payments": [],
+          "menu_promotions": []
+        }
+      },
+      "direct": null,
+      "economy": null,
+      "robot": null,
+      "pickup": {
+        "available": true,
+        "minimum_duration_minute": 10,
+        "coupon_discount": {
+          "maximum_amount": 5000
+        },
+        "shop_discount": null,
+        "additional_discount": null,
+        "bpr_discount": null,
+        "fixed_rate_discount": null,
+        "payment_methods": [
+          "ONLINE"
+        ],
+        "point": {
+          "shop_promotions": [],
+          "franchise_promotions": [],
+          "membership_promotions": [
+            {
+              "display_name": "멤버십",
+              "percent": 5,
+              "mov": 0,
+              "membership_codes": [
+                "YP",
+                "YPX",
+                "YPXN",
+                "YPXT"
+              ],
+              "management_type": "YOGIYO",
+              "by_franchise": false
+            }
+          ],
+          "payments": [],
+          "menu_promotions": []
+        }
+      },
+      "pre_order_pickup": null,
+      "previsit": null,
+      "priority": [
+        "VD",
+        "PICKUP",
+        "STACKABLE"
+      ]
+    },
+    "distance": 1576.19,
+    "customer_distance": null,
+    "use_reusable_packaging": false,
+    "is_allowed_below_minimum_order_amount": false,
+    "is_allowed_one_dish_order": false,
+    "is_allowed_virtual_phone_number": true,
+    "introduction": {
+      "title": "❤️리뷰 이벤트 참여방법 ❤️",
+      "text": "바쁜 현대인.육아 일상속에서 너무나도 지치고 힘들때 딱 그럴때, 여러분의 고됨을 맛있는 음식과 달콤한 음료로 나누면 우리 어떨까요?\n\n그래서 준비 했습니다 \n\n기분 넘 좋아지는 달콤한 살얼음 동동 식혜를 리뷰 이벤트 아이템으로 준비 했습니다 :)\n\n아울러 식혜 500ml + 1.5L를 메인 음료로 추가하여 라인업을 하였습니다\n\n많은 관심 부탁드립니다\n\n항상 생각하고 연구해서, 더 나은 서비스 제공 해드릴 수 있도록 하겠습니다 지켜봐주세요~\n\nP.S) 찍먹.부먹 와사비 소스는 안비밀~~~\n\n고객님 안녕하세요! 기대만족 입니다^^\n\n안타깝게도 요즘 리뷰 약속이 잘 안 지켜지는것 같습니다 ㅠㅠ\n\n고객님께서 소중한 리뷰 약속을 해주시는 만큼,  리뷰 이벤트가 오래오래 저희 매장에서 잘 지속 될 수 있도록 적극적인 참여 부탁드립니다 ^^\n\n항상 좋은 음식과 서비스 제공을 해드리기 위해서 더 노력하는 기대만족 강남본점이 되게끔 되도록 하겠습니다!\n \n죄송합니다 고객님! 혹시 음식 누락과 불편한 점이 있으시면,  아래 번호로 연락주시면  저희가 문제점 신속하게 바로 처리 해드리겠습니다!\n\n02-546-0717\n\n즐거움이 가득한 하루되세요!\n감사합니다 \n\n기대만족 임직원 일동 올림^^",
+      "image_urls": [
+        "https://rev-static.yogiyo.co.kr/introduction/413273/202602101511072b63262b.jpg",
+        "https://rev-static.yogiyo.co.kr/introduction/413273/2026021015110695960a88.jpg",
+        "https://rev-static.yogiyo.co.kr/introduction/413273/20260210151105e9e35c44.jpg",
+        "https://rev-static.yogiyo.co.kr/introduction/413273/20260210151104525a6b62.jpg"
+      ],
+      "has_review_event": false
+    },
+    "delivery_fee_surcharges": [],
+    "nutrition_fact": {
+      "web_url": null,
+      "mobile_url": null
+    },
+    "allergy": {
+      "web_url": null,
+      "mobile_url": null
+    },
+    "country_origin": "돼지고기(부드러운 족발:국내산, 삼겹살:스페인), 쌀(공기밥,주먹밥:국내산), 당근(국내산), 양배추(국내산), 상추(국내산), 마늘(국내산), 청양고추(국내산), 새우젓(중국산),쪽파김치(쪽파:중국산/고춧가루:중국산), 무김치(무:국내산 / 고춧가루:중국산)",
+    "violations": [],
+    "is_allowed_livelihood_voucher": false,
+    "yocvs_pos_code": null,
+    "chicken_weight": null
+  }
+}
