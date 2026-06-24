@@ -2,3 +2,4 @@
 .env
 antigravity_brain/
 local_delivery.db
+.venv

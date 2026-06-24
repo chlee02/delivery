@@ -137,7 +137,7 @@ def run_real_scraper(limit, offset=0, lat=None, lng=None, adm_code=None):
     list_params.update({
         "length": str(limit),
         "start": str(offset),
-        "sort": "RANK_DESC",
+        "sort": "DISTANCE_ASC",
         "serving_types": "VD",
         "use_bargainyo": "false"
     })
