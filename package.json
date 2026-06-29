@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "fast-levenshtein": "^3.0.0",
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "@types/fast-levenshtein": "^0.0.4",
+    "@types/leaflet": "^1.9.21"
+  }
+}

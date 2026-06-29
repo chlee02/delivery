@@ -1,28 +1,36 @@
 import { NextResponse } from 'next/server';
 import { Pool } from 'pg';
 
-// Create a single client pool that will be reused across requests
+// 전역 자원 누수를 방지하기 위해 단일 Pool 인스턴스를 유지합니다.
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.DATABASE_URL?.includes('supabase.com') ? { rejectUnauthorized: false } : undefined,
-  max: 10, // Limit maximum connections in the pool
+  max: 10,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 5000,
+  connectionTimeoutMillis: 15000,
 });
 
 export async function GET() {
   let client;
   try {
     client = await pool.connect();
-    
-    // Retrieve refined shops, prioritizing raw ratings
-    const queryResult = await client.query('SELECT * FROM refined_shops ORDER BY raw_rating DESC');
-    
-    // Map DB rows to API response objects
+
+    const query = `
+      SELECT 
+        r.*, 
+        s.company_name AS raw_company_name 
+      FROM refined_shops r
+      LEFT JOIN shops s ON r.id = s.id
+      LIMIT 100
+    `;
+
+    const queryResult = await client.query(query);
+
     const shops = queryResult.rows.map(shop => {
       return {
         id: shop.id,
         name: shop.name,
+        company_name: shop.raw_company_name || null,
         address: shop.address,
         detailed_address: shop.detailed_address,
         building_name: shop.building_name,
@@ -51,7 +59,7 @@ export async function GET() {
     );
   } finally {
     if (client) {
-      client.release();
+      client.release(); // 💎 안전하게 풀로 자원을 반납합니다.
     }
   }
 }

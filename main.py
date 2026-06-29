@@ -1,8 +1,9 @@
-# main.py
 import os
 import json
 import subprocess
 import sys
+import time  # [추가] 10분 대기를 위한 time 모듈
+from datetime import datetime  # [추가] 로그 확인용 시간 모듈
 
 # 상태를 저장할 파일명
 INDEX_FILE = "current_index.txt"
@@ -32,8 +33,9 @@ def run_step(command_list):
         print(f"❌ 단계 실패 코드: {result.returncode}")
         sys.exit(result.returncode)
 
-def main():
-    # 1. 인덱스 및 행정동 데이터 로드
+def run_single_etl():
+    """1개의 행정동을 수집하는 단일 ETL 파이프라인 단위입니다."""
+    # 1. 루프할 때마다 최신 인덱스 및 행정동 데이터 로드
     current_index = get_current_index()
     
     if not os.path.exists(COORDINATE_FILE):
@@ -44,8 +46,8 @@ def main():
         coordinates = json.load(f)
         
     if current_index >= len(coordinates):
-        print("🎉 모든 행정동의 수집이 완료되었습니다! 파이프라인을 종료합니다.")
-        sys.exit(0)
+        print("🎉 모든 행정동의 수집이 완료되었습니다! 파이프라인을 완료 상태로 종료합니다.")
+        return False  # 수집이 끝났음을 알림
         
     # 2. 이번 회차에 수집할 행정동 타겟 추출
     target_district = coordinates[current_index]
@@ -60,16 +62,13 @@ def main():
     print(f"🚀 [회차 {current_index}] {sido} {gungu} {dong} (코드: {adm_code}) 수집 시작")
     print(f"==================================================")
 
-    # 3. Step 1: 요기요 스크래퍼 실행 (인자 규격 반영)
-    # 질문자님의 scraper 구조에 맞춰 파일 경로를 지정해 줍니다.
-    # 만약 파일 위치가 src/scraper/ygy_scraper.py 라면 아래 경로를 맞춰주세요.
+    # 3. Step 1: 요기요 스크래퍼 실행
     scraper_path = os.path.join("src", "scraper", "ygy_scraper.py")
     run_step(["python3", scraper_path, "--adm_code", str(adm_code), "--lat", lat, "--lng", lng, "--limit", "100"])
 
     # 4. Step 2: DQ 검증기 가동
-    validator_path = os.path.join("src", "quality", "dq_validator.py") # 혹은 스크립트가 속한 정확한 폴더 경로
+    validator_path = os.path.join("src", "quality", "dq_validator.py")
     if not os.path.exists(validator_path):
-        # 만약 src 내부 등 다른 곳에 있다면 경로를 맞춰줍니다.
         validator_path = "src/quality/dq_validator.py" 
     run_step(["python3", validator_path])
 
@@ -83,6 +82,29 @@ def main():
     next_index = current_index + 1
     update_index(next_index)
     print(f"\n✅ {dong} 처리 성공! 다음 타겟 인덱스는 [{next_index}] 입니다.\n")
+    return True  # 다음 루프를 계속 진행할 수 있음
+
+def main():
+    TOTAL_ITERATIONS = 6
+    INTERVAL_SECONDS = 300
+
+    for i in range(TOTAL_ITERATIONS):
+        current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(f"\n⏱️ [스케줄 루프 {i+1}/{TOTAL_ITERATIONS}] 현재 시간: {current_time}")
+        
+        # ETL 파이프라인 1회 가동
+        has_next = run_single_etl()
+        
+        # 더 수집할 데이터가 없다면(종료 조건) 루프 탈출
+        if not has_next:
+            break
+            
+        # 마지막 바퀴가 아니라면 5분 동안 대기
+        if i < TOTAL_ITERATIONS - 1:
+            print(f"⏳ 다음 수집까지 5분간 대기합니다... (대기 시작 시간: {datetime.now().strftime('%H:%M:%S')})")
+            time.sleep(INTERVAL_SECONDS)
+
+    print("\n🏁 지정된 1시간 분량(총 6회)의 수집 스케줄 루프가 안전하게 완료되었습니다.")
 
 if __name__ == "__main__":
     main()

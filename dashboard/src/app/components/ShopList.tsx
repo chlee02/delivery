@@ -12,8 +12,11 @@ type Shop = {
   review_count: number;
   has_review_event: boolean;
   is_shop_in_shop: boolean;
-  is_suspicious: boolean;
+  is_suspicious?: boolean;
   sis_sibling_names?: string;
+  company_name?: string;
+  risk_score?: number;
+  is_ghost_kitchen?: boolean;
 };
 
 interface Props {
@@ -23,6 +26,14 @@ interface Props {
 const ShopList: React.FC<Props> = ({ shops }) => {
   // Determine credibility score and state based on review event and SIS status
   const getCredibility = (shop: Shop) => {
+    if (shop.is_ghost_kitchen) {
+      return {
+        score: Math.max(100 - (shop.risk_score || 70), 10), // 위험도가 80점이면 신뢰도는 20%
+        level: '위험',
+        className: 'low',
+        color: '#e74c3c' // 빨간색 위험 표시
+      };
+    }
     if (shop.is_shop_in_shop) {
       return { score: 35, level: '낮음', className: 'low', color: 'var(--color-sis)' };
     }
@@ -47,12 +58,12 @@ const ShopList: React.FC<Props> = ({ shops }) => {
         <div className="shops-grid">
           {shops.map((shop) => {
             const credibility = getCredibility(shop);
-            const cardModifier = shop.is_shop_in_shop 
-              ? 'is-sis' 
+            const cardModifier = shop.is_shop_in_shop
+              ? 'is-sis'
               : shop.is_suspicious
                 ? 'is-suspicious'
-                : shop.has_review_event 
-                  ? 'is-event' 
+                : shop.has_review_event
+                  ? 'is-event'
                   : 'is-clean';
 
             // Construct granular address string
@@ -64,17 +75,24 @@ const ShopList: React.FC<Props> = ({ shops }) => {
             ].filter(Boolean).join(' ');
 
             return (
-              <div 
-                key={shop.id} 
+              <div
+                key={shop.id}
                 className={`shop-card ${cardModifier} fade-in-up`}
               >
                 <div>
-                  <div className="shop-category">
-                    {shop.is_shop_in_shop ? '위장 의심' : shop.is_suspicious ? '밀집 의심' : '요기요 등록점'}
+                  <div className="shop-category" style={{ backgroundColor: shop.is_ghost_kitchen ? '#e74c3c' : '' }}>
+                    {shop.is_ghost_kitchen ? '🚨 위장 가맹 위험' : shop.is_shop_in_shop ? '위장 의심' : shop.is_suspicious ? '밀집 의심' : '요기요 등록점'}
                   </div>
 
                   <div className="shop-info-top">
-                    <h3 className="shop-name">{shop.name}</h3>
+                    <div>
+                      <h3 className="shop-name">{shop.name}</h3>
+                      {shop.company_name && (
+                        <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', display: 'block', marginTop: '2px' }}>
+                          종포상호명: {shop.company_name}
+                        </span>
+                      )}
+                    </div>
                     <div className="shop-rating-box">
                       <span className="rating-value">
                         ⭐ {shop.raw_rating.toFixed(1)}
@@ -93,6 +111,11 @@ const ShopList: React.FC<Props> = ({ shops }) => {
                   </p>
 
                   <div className="badge-row">
+                    {shop.is_ghost_kitchen && (
+                      <span className="tag-badge ghost-kitchen" style={{ backgroundColor: '#e74c3c', color: 'white' }}>
+                        💀 위장 가맹점(Ghost) [위험도 {shop.risk_score}%]
+                      </span>
+                    )}
                     {shop.is_shop_in_shop && (
                       <span className="tag-badge sis">
                         🚨 위장 가맹점(SIS)
@@ -126,11 +149,11 @@ const ShopList: React.FC<Props> = ({ shops }) => {
                       </span>
                     </div>
                     <div className="gauge-track">
-                      <div 
-                        className="gauge-fill" 
-                        style={{ 
-                          width: `${credibility.score}%`, 
-                          backgroundColor: credibility.color 
+                      <div
+                        className="gauge-fill"
+                        style={{
+                          width: `${credibility.score}%`,
+                          backgroundColor: credibility.color
                         }}
                       ></div>
                     </div>
