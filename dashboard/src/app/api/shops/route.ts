@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { Pool } from 'pg';
 
 // 전역 자원 누수를 방지하기 위해 단일 Pool 인스턴스를 유지합니다.
@@ -10,7 +10,14 @@ const pool = new Pool({
   connectionTimeoutMillis: 15000,
 });
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const sigungu = searchParams.get('sigungu');
+
+  if (!sigungu) {
+    return NextResponse.json([]);
+  }
+
   let client;
   try {
     client = await pool.connect();
@@ -21,10 +28,10 @@ export async function GET() {
         s.company_name AS raw_company_name 
       FROM refined_shops r
       LEFT JOIN shops s ON r.id = s.id
-      LIMIT 100
+      WHERE s.law_address_sigungu = $1
     `;
 
-    const queryResult = await client.query(query);
+    const queryResult = await client.query(query, [sigungu]);
 
     const shops = queryResult.rows.map(shop => {
       return {

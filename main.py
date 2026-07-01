@@ -3,11 +3,42 @@ import json
 import subprocess
 import sys
 import time  # [추가] 10분 대기를 위한 time 모듈
-from datetime import datetime  # [추가] 로그 확인용 시간 모듈
+from datetime import datetime, timedelta  # [추가] 로그 확인용 시간 모듈
+from sqlalchemy import text
+from src.db.connection import db_manager
 
 # 상태를 저장할 파일명
 INDEX_FILE = "current_index.txt"
 COORDINATE_FILE = "data/district_coordinate.json"
+
+def update_last_updated_time():
+    """데이터베이스의 system_metadata 테이블에 마지막 실행 시간을 저장합니다."""
+    session = db_manager.get_session()
+    try:
+        session.execute(text("""
+            CREATE TABLE IF NOT EXISTS system_metadata (
+                key VARCHAR(50) PRIMARY KEY,
+                value VARCHAR(100)
+            )
+        """))
+        
+        # 한국 시간 구하기 (KST)
+        kst_now = datetime.utcnow() + timedelta(hours=9)
+        kst_str = kst_now.strftime('%Y-%m-%d %H:%M:%S')
+        
+        session.execute(text("""
+            INSERT INTO system_metadata (key, value) 
+            VALUES ('last_updated', :val)
+            ON CONFLICT (key) 
+            DO UPDATE SET value = EXCLUDED.value
+        """), {"val": kst_str})
+        session.commit()
+        print(f"💾 DB에 마지막 업데이트 시간 기록 완료: {kst_str}")
+    except Exception as e:
+        session.rollback()
+        print(f"⚠️ DB 업데이트 시간 기록 실패: {e}")
+    finally:
+        session.close()
 
 def get_current_index():
     """현재 가리키고 있는 행정동 인덱스를 읽어옵니다."""
@@ -81,6 +112,10 @@ def run_single_etl():
     # 6. 모든 과정이 성공하면 인덱스를 1 증가시켜 업데이트
     next_index = current_index + 1
     update_index(next_index)
+    
+    # 7. 데이터베이스에 마지막 업데이트 시각 기록
+    update_last_updated_time()
+    
     print(f"\n✅ {dong} 처리 성공! 다음 타겟 인덱스는 [{next_index}] 입니다.\n")
     return True  # 다음 루프를 계속 진행할 수 있음
 
