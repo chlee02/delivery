@@ -108,11 +108,11 @@ const Map: React.FC<Props> = ({ shops }) => {
       ].filter(Boolean).join(' ');
 
       const popupContent = `
-        <div style="min-width:180px;color:#111;padding:5px;">
-          <h3 style="margin:0 0 4px 0;font-size:0.95rem;font-weight:800;color:#000;">${shop.name}</h3>
-          <p style="margin:0 0 2px 0;font-size:0.75rem;color:#555;">${shop.address}</p>
-          <p style="margin:0 0 8px 0;font-size:0.7rem;color:#777;">${fullDetail}</p>
-          <div style="border-top:1px solid rgba(0,0,0,0.1);padding-top:8px;font-weight:800;color:#f59e0b;">⭐ ${shop.raw_rating.toFixed(1)}</div>
+        <div style="min-width:180px;color:var(--color-text);padding:5px;">
+          <h3 style="margin:0 0 4px 0;font-size:0.95rem;font-weight:800;color:var(--color-text);">${shop.name}</h3>
+          <p style="margin:0 0 2px 0;font-size:0.75rem;color:var(--color-text-muted);">${shop.address}</p>
+          <p style="margin:0 0 8px 0;font-size:0.7rem;color:var(--color-text-dark);">${fullDetail}</p>
+          <div style="border-top:1px solid var(--color-border);padding-top:8px;font-weight:800;color:#f59e0b;">⭐ ${shop.raw_rating.toFixed(1)}</div>
         </div>
       `;
 
