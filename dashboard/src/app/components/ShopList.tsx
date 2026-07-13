@@ -17,6 +17,7 @@ type Shop = {
   company_name?: string;
   risk_score?: number;
   is_ghost_kitchen?: boolean;
+  logo_url?: string;
 };
 
 interface Props {
@@ -85,13 +86,33 @@ const ShopList: React.FC<Props> = ({ shops }) => {
                   </div>
 
                   <div className="shop-info-top">
-                    <div>
-                      <h3 className="shop-name">{shop.name}</h3>
-                      {shop.company_name && (
-                        <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', display: 'block', marginTop: '2px' }}>
-                          종포상호명: {shop.company_name}
-                        </span>
-                      )}
+                    <div className="shop-logo-container">
+                      {shop.logo_url ? (
+                        <img 
+                          src={shop.logo_url} 
+                          alt={`${shop.name} 로고`} 
+                          className="shop-logo"
+                          onError={(e) => {
+                            (e.currentTarget as HTMLElement).style.display = 'none';
+                            const sibling = (e.currentTarget as HTMLElement).nextElementSibling;
+                            if (sibling) (sibling as HTMLElement).style.display = 'flex';
+                          }}
+                        />
+                      ) : null}
+                      <div 
+                        className="shop-logo-placeholder"
+                        style={{ display: shop.logo_url ? 'none' : 'flex' }}
+                      >
+                        {shop.name ? shop.name.charAt(0) : '🍳'}
+                      </div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <h3 className="shop-name">{shop.name}</h3>
+                        {shop.company_name && (
+                          <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', display: 'block', marginTop: '2px' }}>
+                            종포상호명: {shop.company_name}
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <div className="shop-rating-box">
                       <span className="rating-value">

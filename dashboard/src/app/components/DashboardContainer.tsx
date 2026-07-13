@@ -33,6 +33,7 @@ export type Shop = {
   company_name?: string;
   risk_score?: number;
   is_ghost_kitchen?: boolean;
+  logo_url?: string;
 };
 
 const DashboardContainer: React.FC = () => {

@@ -25,7 +25,8 @@ export async function GET(request: NextRequest) {
     const query = `
       SELECT 
         r.*, 
-        s.company_name AS raw_company_name 
+        s.company_name AS raw_company_name,
+        s.logo_url
       FROM refined_shops r
       LEFT JOIN shops s ON r.id = s.id
       WHERE s.law_address_sigungu = $1
@@ -38,6 +39,7 @@ export async function GET(request: NextRequest) {
         id: shop.id,
         name: shop.name,
         company_name: shop.raw_company_name || null,
+        logo_url: shop.logo_url || null,
         address: shop.address,
         detailed_address: shop.detailed_address,
         building_name: shop.building_name,
